@@ -68,6 +68,9 @@ class ModelBuilderPipeline:
         plt.title("Training and Validation Loss")
         plt.show()
 
+    def _save(self):
+        self.model.save(f"./models/{self.name}.h5")
+
     def run(self, tds, vds, ttds):
         self._fit(tds=tds, vds=vds)
         self._evaluate(ttds=ttds)
