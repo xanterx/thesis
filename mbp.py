@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class ModelBuilderPipeline:
     def __init__(
-        self, model, input_shape, batch_size=16, epoch=3, optimizer="adam"
+        self, model, input_shape, batch_size=16, epoch=10, optimizer="adam"
     ) -> None:
         self.model = model
         self.input_shape = input_shape
