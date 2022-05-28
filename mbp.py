@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 
 class ModelBuilderPipeline:
     def __init__(
-        self, model, input_shape, batch_size=16, epoch=10, optimizer="adam"
+        self, name, model, input_shape, batch_size=16, epoch=10, optimizer="adam"
     ) -> None:
+        self.name = name
         self.model = model
         self.input_shape = input_shape
         self.batch_size = batch_size
@@ -69,9 +70,17 @@ class ModelBuilderPipeline:
         plt.show()
 
     def _save(self):
-        self.model.save(f"./models/{self.name}.h5")
+        print("\n\n👉 Saving the model...")
+        self.model.save(f"./models/thesis_{self.name}.h5")
+
+    def _performance(self):
+        perf = dict(zip(self.model.metrics_names, self.score))
+        perf["name"] = self.name
+        return perf
 
     def run(self, tds, vds, ttds):
         self._fit(tds=tds, vds=vds)
         self._evaluate(ttds=ttds)
+        print(self._performance())
+        self._save()
         self._plot()
