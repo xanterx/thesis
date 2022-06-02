@@ -202,3 +202,8 @@ class ModelTestPipeline:
         img = Image.open(image_path)
         img = np.array(img)
         return self.labels[np.argmax(self.model.predict(img[None, :, :])[0])]
+
+    def raw_predict(self, image_path):
+        img = Image.open(image_path)
+        img = np.array(img)
+        return self.model.predict(img[None, :, :])[0]
